@@ -9,14 +9,14 @@ namespace JetbrainsToolboxShortcutsGenerator
 {
 	class Program
 	{
-		// Default folder is here: C:\Users\User\AppData\Local\JetBrains\Toolbox\Apps\...
+		// Default folder for unconfigured Jetbrains Toolbox most likely here: C:\Users\User\AppData\Local\JetBrains\Toolbox\Apps\...
 		public static string ToolboxFolder = Environment.CurrentDirectory;
 		public static string LinkFolder = Environment.CurrentDirectory;
 		public static int MaxDepth = 10;
 
 		public static string BinariesFile = "jetbrainsbinaries.txt";
 		/// <summary>
-		/// The Jetbrains exe files we're looking file.
+		/// The Jetbrains exe files we're looking for.
 		/// </summary>
 		private static List<string> Binaries = new List<string>
 		{
