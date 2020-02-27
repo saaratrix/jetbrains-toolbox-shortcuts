@@ -2,7 +2,7 @@
 Jetbrains Toolbox generates a new folder every time you update a version for an application. 
 Which means that it's difficult to set file associations correctly as the binary path is changed every time.
 
-Related Jetbrain issues:  
+Example of related Jetbrain issues:  
 https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000174064-PhpStorm-updates-do-not-account-for-Windows-file-associations  
 https://youtrack.jetbrains.com/issue/TBX-2540
 
