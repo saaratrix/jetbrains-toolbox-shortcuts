@@ -6,7 +6,7 @@ Example of related Jetbrain issues:
 https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000174064-PhpStorm-updates-do-not-account-for-Windows-file-associations  
 https://youtrack.jetbrains.com/issue/TBX-2540
 
-This applications is a workaround that which generates shortcuts that you can link to instead so the path is always the same.
+This applications is a workaround which generates shortcuts that you can link to instead so the path is always the same.
 In my case I have the shortcuts at `C:\Programming\`.
 Every time an application is updated you need to run the .exe file again to update the shortcuts.
 ![example](example.png)
