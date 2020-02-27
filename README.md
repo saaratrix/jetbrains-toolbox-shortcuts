@@ -11,6 +11,10 @@ In my case I have the shortcuts at `C:\Programming\`.
 Every time an application is updated you need to run the .exe file again to update the shortcuts.
 ![example](example.png)
 
+The jetbrains folder in the image above is where the applications are for me.
+Set in the Jetbrains Toolbox app:  
+![jetbrains toolbox settings](toolboxsettings.png)
+
 ## How to use:
 There are some settings you can pass to the `JetbrainsToolboxShortcutsGenerator.exe` unless you want to compile it from source and edit them there.
 
