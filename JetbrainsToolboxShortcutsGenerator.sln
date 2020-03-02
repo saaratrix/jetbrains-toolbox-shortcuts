@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetbrainsToolboxShortcutsGenerator", "JetbrainsToolboxShortcutsGenerator\JetbrainsToolboxShortcutsGenerator.csproj", "{90EA9E43-2870-4609-B0A3-7144E141823F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{06C4B639-43A0-4DF4-9C6F-22C652D2DA82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{90EA9E43-2870-4609-B0A3-7144E141823F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90EA9E43-2870-4609-B0A3-7144E141823F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90EA9E43-2870-4609-B0A3-7144E141823F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06C4B639-43A0-4DF4-9C6F-22C652D2DA82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06C4B639-43A0-4DF4-9C6F-22C652D2DA82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06C4B639-43A0-4DF4-9C6F-22C652D2DA82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06C4B639-43A0-4DF4-9C6F-22C652D2DA82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

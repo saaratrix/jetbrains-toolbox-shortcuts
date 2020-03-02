@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
 namespace JetbrainsToolboxShortcutsGenerator
 {
-	class Program
+	public class Program
 	{
 		// Default folder for unconfigured Jetbrains Toolbox most likely here: C:\Users\User\AppData\Local\JetBrains\Toolbox\Apps\...
 		public static string ToolboxFolder = Environment.CurrentDirectory;
@@ -15,6 +16,11 @@ namespace JetbrainsToolboxShortcutsGenerator
 		public static int MaxDepth = 10;
 
 		public static string BinariesFile = "jetbrainsbinaries.txt";
+		/// <summary>
+		/// File inside the ch-0 folder where the folder versions are.
+		/// If this file exists we can assume the folders are the versions excluding version.plugins folders but they don't have the binaries in them.
+		/// </summary>
+		public static string BuildFile = "build.txt";
 		/// <summary>
 		/// The Jetbrains exe files we're looking for.
 		/// </summary>
@@ -25,6 +31,7 @@ namespace JetbrainsToolboxShortcutsGenerator
 				"clion64.exe", "goland64.exe", "idea64.exe", "phpstorm64.exe", "rubymine64.exe", 
 		};
 		public static int ShortcutsGenerated = 0;
+		public static Dictionary<string, List<BinarySearchResult>> SearchResults = new Dictionary<string, List<BinarySearchResult>>();
 		
 		static void Main(string[] args)
 		{
@@ -43,7 +50,9 @@ namespace JetbrainsToolboxShortcutsGenerator
 			
 			ParseBinaries();
 			
-			GenerateLinks(ToolboxFolder, 0);
+			FindLinks(ToolboxFolder, 0, "");
+			GenerateLinks();
+			
 			
 			if (ShortcutsGenerated == 0)
 				Console.WriteLine("Did not find any binaries to create shortcuts for.");
@@ -103,7 +112,7 @@ namespace JetbrainsToolboxShortcutsGenerator
 		/// <summary>
 		/// Recursively look through all the files & directories.
 		/// </summary>
-		public static void GenerateLinks(string path, int depth)
+		public static void FindLinks(string path, int depth, string version)
 		{
 			var files = Directory.GetFiles(path, "*.exe");
 			foreach (var file in files)
@@ -112,7 +121,13 @@ namespace JetbrainsToolboxShortcutsGenerator
 				if (!Binaries.Contains(filename.ToLower()))
 					continue;
 
-				GenerateShortcut(file, filename);
+				CreateSearchResult(file, filename, version);
+			}
+
+			string historyFilePath = Path.Combine(path, BuildFile);
+			if (File.Exists(historyFilePath))
+			{
+				version = GetVersionFromPath(path);
 			}
 
 			if (depth >= MaxDepth)
@@ -121,8 +136,53 @@ namespace JetbrainsToolboxShortcutsGenerator
 			var directories = Directory.GetDirectories(path);
 			foreach (var directory in directories)
 			{
-				GenerateLinks(directory, depth + 1);
+				FindLinks(directory, depth + 1, version);
 			}
+		}
+
+		/// <summary>
+		/// Example path: C:\Programming\Jetbrains\apps\WebStorm\ch-0\193.6494.34
+		/// </summary>
+		/// <param name="path"></param>
+		/// <returns></returns>
+		public static string GetVersionFromPath(string path)
+		{
+			string version = path.Split(Path.DirectorySeparatorChar).Last();
+			return version;
+		}
+
+		public static void CreateSearchResult(string filepath, string filename, string version)
+		{
+			if (string.IsNullOrWhiteSpace(version))
+				Console.WriteLine($"Couldn't detect version for {filepath}\\{filename}");
+			
+			if (!SearchResults.ContainsKey(filename))
+				SearchResults[filename] = new List<BinarySearchResult>();
+			
+			SearchResults[filename].Add(new BinarySearchResult()
+			{
+					Filename = filename,
+					Filepath = filepath,
+					Version = version
+			});
+		}
+		
+		private static void GenerateLinks()
+		{
+			foreach (var kvp in SearchResults)
+			{
+				var searchResult = GetHighestVersionResult(kvp.Value);
+				if (searchResult == null)
+					continue;
+				
+				GenerateShortcut(searchResult.Filepath, searchResult.Filename);
+			}
+		}
+
+		public static BinarySearchResult GetHighestVersionResult(List<BinarySearchResult> searchResults)
+		{
+			var sortedList = searchResults.OrderByDescending(v => v.Version);
+			return sortedList.FirstOrDefault();
 		}
 
 		// Source for all the IShellLink stuff: https://stackoverflow.com/a/14632782/2437350
@@ -143,6 +203,13 @@ namespace JetbrainsToolboxShortcutsGenerator
 			Console.WriteLine($"Generated shortcut for file: {filename} at {linkPath} targeting {filepath}");
 			ShortcutsGenerated++;
 		}
+	}
+
+	public class BinarySearchResult
+	{
+		public string Filename { get; set; }
+		public string Filepath { get; set; }
+		public string Version { get; set; }
 	}
 	
 	
