@@ -1,8 +1,8 @@
 # jetbrains-toolbox-shortcuts
-Jetbrains Toolbox generates a new folder every time you update a version for an application. 
+JetBrains Toolbox generates a new folder every time you update a version for an application. 
 Which means that it's difficult to set file associations correctly as the binary path is changed every time.
 
-Example of related Jetbrain issues:  
+Example of related JetBrains issues:  
 https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000174064-PhpStorm-updates-do-not-account-for-Windows-file-associations  
 https://youtrack.jetbrains.com/issue/TBX-2540
 
@@ -12,7 +12,7 @@ Every time an application is updated you need to run the .exe file again to upda
 ![example](example.png)
 
 The jetbrains folder in the image above is where the applications are for me.
-Set in the Jetbrains Toolbox app:  
+Set in the JetBrains Toolbox app:  
 ![jetbrains toolbox settings](toolboxsettings.png)
 
 ## How to use:
