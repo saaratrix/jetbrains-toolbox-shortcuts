@@ -1,4 +1,4 @@
-## Since some Toolbox versions ago (6th January 2020) I don't think this is necessary anymore, at least the windows toolbar shortcuts are automatically updated (which this software couldn't do for me when a new version came.)
+## Since some Toolbox versions ago (6th January 2021) I don't think this is necessary anymore, at least the windows toolbar shortcuts are automatically updated (which this software couldn't do for me when a new version came.)
 
 # jetbrains-toolbox-shortcuts
 JetBrains Toolbox generates a new folder every time you update a version for an application. 
